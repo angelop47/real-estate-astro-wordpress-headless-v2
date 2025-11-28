@@ -1,0 +1,194 @@
+---
+const properties = [
+    {
+        id: 1,
+        title: "Villa Moderna con Vista al Mar",
+        location: "Costa del Sol, España",
+        price: "€2,500,000",
+        beds: 5,
+        baths: 4,
+        area: "450 m²",
+        image: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=1000&auto=format&fit=crop",
+        tag: "Venta",
+    },
+    {
+        id: 2,
+        title: "Penthouse de Lujo en el Centro",
+        location: "Madrid, España",
+        price: "€1,800,000",
+        beds: 3,
+        baths: 3,
+        area: "280 m²",
+        image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=1000&auto=format&fit=crop",
+        tag: "Venta",
+    },
+    {
+        id: 3,
+        title: "Mansión Clásica Renovada",
+        location: "Barcelona, España",
+        price: "€3,200,000",
+        beds: 6,
+        baths: 5,
+        area: "600 m²",
+        image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000&auto=format&fit=crop",
+        tag: "Destacado",
+    },
+];
+---
+
+<section id="properties" class="py-20 bg-gray-50">
+    <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+            <span
+                class="text-blue-600 font-semibold tracking-wider uppercase text-sm"
+                >Exclusividad</span
+            >
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-2 mb-4">
+                Propiedades Destacadas
+            </h2>
+            <p class="text-gray-600 max-w-2xl mx-auto">
+                Una selección curada de las propiedades más impresionantes
+                disponibles en el mercado actual.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {
+                properties.map((prop) => (
+                    <div class="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100">
+                        <div class="relative h-64 overflow-hidden">
+                            <img
+                                src={prop.image}
+                                alt={prop.title}
+                                class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+                            />
+                            <div class="absolute top-4 left-4 bg-blue-600 text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wide">
+                                {prop.tag}
+                            </div>
+                            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                                <p class="text-white font-bold text-xl">
+                                    {prop.price}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="p-6">
+                            <div class="flex items-start justify-between mb-4">
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-900 mb-1 group-hover:text-blue-600 transition-colors">
+                                        {prop.title}
+                                    </h3>
+                                    <p class="text-gray-500 text-sm flex items-center gap-1">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            class="h-4 w-4"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke="currentColor"
+                                        >
+                                            <>
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="2"
+                                                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                                                />
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="2"
+                                                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                                                />
+                                            </>
+                                        </svg>
+                                        {prop.location}
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between py-4 border-t border-gray-100 text-gray-600 text-sm">
+                                <div class="flex items-center gap-2">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="h-5 w-5 text-blue-500"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                                        />
+                                    </svg>
+                                    <span>{prop.beds} Hab</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="h-5 w-5 text-blue-500"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+                                        />
+                                    </svg>
+                                    <span>{prop.baths} Baños</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="h-5 w-5 text-blue-500"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"
+                                        />
+                                    </svg>
+                                    <span>{prop.area}</span>
+                                </div>
+                            </div>
+
+                            <button class="w-full mt-4 py-3 bg-gray-50 hover:bg-blue-600 text-gray-800 hover:text-white font-medium rounded-lg transition-colors duration-300">
+                                Ver Detalles
+                            </button>
+                        </div>
+                    </div>
+                ))
+            }
+        </div>
+
+        <div class="text-center mt-12">
+            <a
+                href="#"
+                class="inline-flex items-center gap-2 text-blue-600 font-semibold hover:text-blue-800 transition-colors"
+            >
+                Ver todas las propiedades
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+            </a>
+        </div>
+    </div>
+</section>
