@@ -26,7 +26,7 @@ const { title } = Astro.props;
 	</head>
 	<body class="font-['Outfit'] text-gray-800 bg-gray-50 antialiased">
 		<header
-			class="fixed w-full z-50 bg-white/90 backdrop-blur-md border-b border-gray-100 transition-all duration-300"
+			class="fixed w-full z-50 bg-white/90 backdrop-blur-md border-b border-gray-100 transition-all duration-300 top-0"
 		>
 			<nav
 				class="container mx-auto px-6 py-4 flex justify-between items-center"
@@ -40,29 +40,27 @@ const { title } = Astro.props;
 
 				<div class="hidden md:flex items-center space-x-8">
 					<a
-						href="#"
+						href="/"
 						class="text-gray-600 hover:text-blue-600 font-medium transition-colors"
 						>Inicio</a
 					>
 					<a
-						href="#properties"
+						href="/propiedades"
 						class="text-gray-600 hover:text-blue-600 font-medium transition-colors"
 						>Propiedades</a
 					>
 					<a
-						href="#services"
-						class="text-gray-600 hover:text-blue-600 font-medium transition-colors"
-						>Servicios</a
-					>
-					<a
-						href="#contact"
+						href="/contacto"
 						class="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-full transition-all shadow-lg shadow-blue-600/20"
 					>
 						Contáctanos
 					</a>
 				</div>
 
-				<button class="md:hidden text-gray-900 focus:outline-none">
+				<button
+					id="mobile-menu-btn"
+					class="md:hidden text-gray-900 focus:outline-none"
+				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						class="h-6 w-6"
@@ -78,7 +76,41 @@ const { title } = Astro.props;
 					</svg>
 				</button>
 			</nav>
+
+			<!-- Mobile Menu -->
+			<div
+				id="mobile-menu"
+				class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full left-0 shadow-lg"
+			>
+				<div class="flex flex-col space-y-4 px-6 py-8">
+					<a
+						href="/"
+						class="text-gray-600 hover:text-blue-600 font-medium transition-colors text-lg"
+						>Inicio</a
+					>
+					<a
+						href="/propiedades"
+						class="text-gray-600 hover:text-blue-600 font-medium transition-colors text-lg"
+						>Propiedades</a
+					>
+					<a
+						href="/contacto"
+						class="text-blue-600 font-medium text-lg"
+					>
+						Contáctanos
+					</a>
+				</div>
+			</div>
 		</header>
+
+		<script>
+			const btn = document.getElementById("mobile-menu-btn");
+			const menu = document.getElementById("mobile-menu");
+
+			btn?.addEventListener("click", () => {
+				menu?.classList.toggle("hidden");
+			});
+		</script>
 
 		<slot />
 
@@ -104,25 +136,29 @@ const { title } = Astro.props;
 								<a
 									href="#"
 									class="text-gray-400 hover:text-white transition-colors"
-									>Inicio</a>
+									>Inicio</a
+								>
 							</li>
 							<li>
 								<a
 									href="#properties"
 									class="text-gray-400 hover:text-white transition-colors"
-									>Propiedades</a>
+									>Propiedades</a
+								>
 							</li>
 							<li>
 								<a
 									href="#services"
 									class="text-gray-400 hover:text-white transition-colors"
-									>Servicios</a>
+									>Servicios</a
+								>
 							</li>
 							<li>
 								<a
 									href="#contact"
 									class="text-gray-400 hover:text-white transition-colors"
-									>Contacto</a>
+									>Contacto</a
+								>
 							</li>
 						</ul>
 					</div>
