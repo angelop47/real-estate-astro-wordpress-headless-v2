@@ -1,0 +1,50 @@
+---
+interface Props {
+    images: string[];
+    mainImageId?: string;
+}
+
+const { images, mainImageId = "main-image" } = Astro.props;
+---
+
+<div class="grid grid-cols-4 gap-4">
+    {
+        images.map((img, index) => (
+            <div
+                class="h-24 rounded-lg overflow-hidden cursor-pointer shadow-sm hover:shadow-md transition-all gallery-grid-thumbnail"
+                data-image={img}
+                data-target-id={mainImageId}
+            >
+                <img
+                    src={img}
+                    alt={`Vista ${index + 1}`}
+                    class="w-full h-full object-cover hover:opacity-80 transition-opacity"
+                />
+            </div>
+        ))
+    }
+</div>
+
+<script>
+    document.addEventListener("astro:page-load", () => {
+        const thumbnails = document.querySelectorAll(".gallery-grid-thumbnail");
+
+        thumbnails.forEach((thumb) => {
+            thumb.addEventListener("click", () => {
+                const newImageSrc = thumb.getAttribute("data-image");
+                const targetId = thumb.getAttribute("data-target-id");
+                const mainImage = document.getElementById(
+                    targetId!,
+                ) as HTMLImageElement;
+
+                if (mainImage && newImageSrc) {
+                    mainImage.style.opacity = "0";
+                    setTimeout(() => {
+                        mainImage.src = newImageSrc;
+                        mainImage.style.opacity = "1";
+                    }, 200);
+                }
+            });
+        });
+    });
+</script>

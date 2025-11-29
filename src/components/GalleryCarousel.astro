@@ -1,0 +1,64 @@
+---
+interface Props {
+    images: string[];
+    mainImageId?: string;
+}
+
+const { images, mainImageId = "main-image" } = Astro.props;
+---
+
+<div
+    class="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 scrollbar-hide"
+>
+    {
+        images.map((img, index) => (
+            <div
+                class="flex-none w-24 h-24 sm:w-32 sm:h-32 rounded-lg overflow-hidden cursor-pointer shadow-sm hover:shadow-md transition-all gallery-carousel-thumbnail snap-center border-2 border-transparent hover:border-blue-500"
+                data-image={img}
+                data-target-id={mainImageId}
+            >
+                <img
+                    src={img}
+                    alt={`Vista ${index + 1}`}
+                    class="w-full h-full object-cover hover:opacity-80 transition-opacity"
+                />
+            </div>
+        ))
+    }
+</div>
+
+<style>
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+    .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+</style>
+
+<script>
+    document.addEventListener("astro:page-load", () => {
+        const thumbnails = document.querySelectorAll(
+            ".gallery-carousel-thumbnail",
+        );
+
+        thumbnails.forEach((thumb) => {
+            thumb.addEventListener("click", () => {
+                const newImageSrc = thumb.getAttribute("data-image");
+                const targetId = thumb.getAttribute("data-target-id");
+                const mainImage = document.getElementById(
+                    targetId!,
+                ) as HTMLImageElement;
+
+                if (mainImage && newImageSrc) {
+                    mainImage.style.opacity = "0";
+                    setTimeout(() => {
+                        mainImage.src = newImageSrc;
+                        mainImage.style.opacity = "1";
+                    }, 200);
+                }
+            });
+        });
+    });
+</script>
