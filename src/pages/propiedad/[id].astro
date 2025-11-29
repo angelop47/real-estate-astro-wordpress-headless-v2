@@ -27,11 +27,13 @@ const { property } = Astro.props;
                         style="transition: opacity 0.3s ease-in-out;"
                     />
                 </div>
-                <div class="grid grid-cols-4 gap-4">
+                <div
+                    class="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 scrollbar-hide"
+                >
                     {
                         property.images.map((img, index) => (
                             <div
-                                class="h-24 rounded-lg overflow-hidden cursor-pointer shadow-sm hover:shadow-md transition-all gallery-thumbnail"
+                                class="flex-none w-24 h-24 sm:w-32 sm:h-32 rounded-lg overflow-hidden cursor-pointer shadow-sm hover:shadow-md transition-all gallery-thumbnail snap-center border-2 border-transparent hover:border-blue-500"
                                 data-image={img}
                             >
                                 <img
@@ -235,6 +237,16 @@ const { property } = Astro.props;
         </div>
     </div>
 </Layout>
+
+<style>
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+    .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+</style>
 
 <script>
     const mainImage = document.getElementById("main-image") as HTMLImageElement;
