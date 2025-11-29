@@ -20,15 +20,20 @@ const { property } = Astro.props;
             <div class="space-y-4">
                 <div class="h-[500px] rounded-2xl overflow-hidden shadow-lg">
                     <img
+                        id="main-image"
                         src={property.image}
                         alt={property.title}
-                        class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                        class="w-full h-full object-cover hover:scale-105 transition-all duration-700"
+                        style="transition: opacity 0.3s ease-in-out;"
                     />
                 </div>
                 <div class="grid grid-cols-4 gap-4">
                     {
                         property.images.map((img, index) => (
-                            <div class="h-24 rounded-lg overflow-hidden cursor-pointer shadow-sm hover:shadow-md transition-all">
+                            <div
+                                class="h-24 rounded-lg overflow-hidden cursor-pointer shadow-sm hover:shadow-md transition-all gallery-thumbnail"
+                                data-image={img}
+                            >
                                 <img
                                     src={img}
                                     alt={`Vista ${index + 1}`}
@@ -230,3 +235,21 @@ const { property } = Astro.props;
         </div>
     </div>
 </Layout>
+
+<script>
+    const mainImage = document.getElementById("main-image") as HTMLImageElement;
+    const thumbnails = document.querySelectorAll(".gallery-thumbnail");
+
+    thumbnails.forEach((thumb) => {
+        thumb.addEventListener("click", () => {
+            const newImageSrc = thumb.getAttribute("data-image");
+            if (mainImage && newImageSrc) {
+                mainImage.style.opacity = "0";
+                setTimeout(() => {
+                    mainImage.src = newImageSrc;
+                    mainImage.style.opacity = "1";
+                }, 200);
+            }
+        });
+    });
+</script>
