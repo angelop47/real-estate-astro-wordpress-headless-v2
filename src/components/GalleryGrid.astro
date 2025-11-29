@@ -26,7 +26,7 @@ const { images, mainImageId = "main-image" } = Astro.props;
 </div>
 
 <script>
-    document.addEventListener("astro:page-load", () => {
+    function initGrid() {
         const thumbnails = document.querySelectorAll(".gallery-grid-thumbnail");
 
         thumbnails.forEach((thumb) => {
@@ -46,5 +46,11 @@ const { images, mainImageId = "main-image" } = Astro.props;
                 }
             });
         });
-    });
+    }
+
+    // Run immediately
+    initGrid();
+
+    // Support View Transitions if added later
+    document.addEventListener("astro:page-load", initGrid);
 </script>

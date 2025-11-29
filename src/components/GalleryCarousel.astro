@@ -38,7 +38,7 @@ const { images, mainImageId = "main-image" } = Astro.props;
 </style>
 
 <script>
-    document.addEventListener("astro:page-load", () => {
+    function initCarousel() {
         const thumbnails = document.querySelectorAll(
             ".gallery-carousel-thumbnail",
         );
@@ -60,5 +60,11 @@ const { images, mainImageId = "main-image" } = Astro.props;
                 }
             });
         });
-    });
+    }
+
+    // Run immediately
+    initCarousel();
+
+    // Support View Transitions if added later
+    document.addEventListener("astro:page-load", initCarousel);
 </script>
