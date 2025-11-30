@@ -65,6 +65,10 @@ interface GraphQLPropertyNode {
             avatar: {
                 url: string;
             };
+            agentes: {
+                cargo: string;
+                telefono: string;
+            };
         };
     };
     propiedadesACF: {
@@ -84,45 +88,51 @@ interface GraphQLPropertyNode {
 export async function fetchProperties(): Promise<Property[]> {
     const query = `
     query GetProperties {
-      propiedadesCPT {
-        nodes {
-          id
-          title
-          content
-          featuredImage {
+  propiedadesCPT {
+    nodes {
+      id
+      title
+      content
+ featuredImage {
             node {
               sourceUrl
             }
           }
-          author {
-            node {
-              name
-              avatar {
-                url
-              }
-            }
+      author {
+        node {
+          name
+          avatar {
+            url
           }
-          ... on WithAcfPropiedadesACF {
-            propiedadesACF {
-              ciudad
-              departamento
-              operacion
-              precio
-              habitaciones
-              banos
-              area
-              galeria {
-                fullFileUrl
-              }
+          ... on WithAcfAgentes {
+            agentes {
+              cargo
+              telefono
             }
           }
         }
       }
+      ... on WithAcfPropiedadesACF {
+        propiedadesACF {
+          ciudad
+          departamento
+          operacion
+          precio
+          habitaciones
+          banos
+          area
+          galeria {
+            fullFileUrl
+          }
+        }
+      }
     }
+  }
+}
     `;
 
     try {
-        const response = await fetch('http://localhost:8883/graphql', {
+        const response = await fetch(import.meta.env.GRAPHQL_URL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -166,9 +176,9 @@ export async function fetchProperties(): Promise<Property[]> {
                 images: images,
                 agent: {
                     name: node.author.node.name,
-                    role: "Agente", // Default role
+                    role: node.author.node.agentes.cargo,
                     image: node.author.node.avatar.url,
-                    phone: "", // Not available
+                    phone: node.author.node.agentes.telefono,
                     email: "" // Not available
                 }
             };
