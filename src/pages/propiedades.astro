@@ -1,6 +1,8 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { properties } from "../data/properties";
+import { fetchProperties } from "../data/properties";
+
+const properties = await fetchProperties();
 ---
 
 <Layout title="Propiedades | LuxeEstate">

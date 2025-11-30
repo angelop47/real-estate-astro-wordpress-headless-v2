@@ -1,5 +1,7 @@
 ---
-import { properties } from "../data/properties";
+import { fetchProperties } from "../data/properties";
+
+const properties = await fetchProperties();
 ---
 
 <section id="properties" class="py-20 bg-gray-50">
