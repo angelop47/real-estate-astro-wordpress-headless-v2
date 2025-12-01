@@ -1,5 +1,6 @@
 ---
-
+import { Image } from "astro:assets";
+import HeroImage from "../assets/hero-image.jpg";
 ---
 
 <section
@@ -7,10 +8,12 @@
 >
     <!-- Background Image with Overlay -->
     <div class="absolute inset-0 z-0">
-        <img
-            src="https://casasinhaus.com/wp-content/uploads/2024/01/casa-en-l-madrid-iluminacion-led-porches.jpg"
+        <Image
+            src={HeroImage}
             alt="Luxury Home"
             class="w-full h-full object-cover"
+            widths={[400, 800, 1200, 1600]}
+            sizes="100vw"
         />
         <div
             class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60"
