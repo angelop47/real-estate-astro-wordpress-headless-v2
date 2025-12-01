@@ -3,15 +3,14 @@ import Layout from "../../layouts/Layout.astro";
 import GalleryCarousel from "../../components/GalleryCarousel.astro";
 import { fetchProperties } from "../../data/properties";
 
-export async function getStaticPaths() {
-    const properties = await fetchProperties();
-    return properties.map((prop) => ({
-        params: { id: prop.id },
-        props: { property: prop },
-    }));
-}
+const { id } = Astro.params;
 
-const { property } = Astro.props;
+const properties = await fetchProperties();
+const property = properties.find((p) => p.id === id);
+
+if (!property) {
+    return Astro.redirect("/404");
+}
 ---
 
 <Layout title={`${property.title} | LuxeEstate`}>
